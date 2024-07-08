@@ -1,4 +1,6 @@
 using ComicBookCrud.DataAccess.Data;
+using ComicBookCrud.DataAccess.Repository;
+using ComicBookCrud.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ComicCrudDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultComicConnection")));
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
@@ -28,6 +31,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

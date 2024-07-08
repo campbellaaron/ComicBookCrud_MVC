@@ -1,19 +1,21 @@
 ﻿using ComicBookCrud.DataAccess.Data;
+using ComicBookCrud.DataAccess.Repository.IRepository;
 using ComicBookCrud.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ComicBookCrud.Controllers
+namespace ComicBooksWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
-        private readonly ComicCrudDbContext _context;
-        public CategoryController(ComicCrudDbContext db)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryController(IUnitOfWork unitOfWork)
         {
-            _context = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
-            List<Category> objCategoryList = _context.Categories.ToList(); // Retrieves the list of Categories from the database using the DbContext set in Data folder
+            List<Category> objCategoryList = _unitOfWork.Category.GetAll().ToList(); // Retrieves the list of Categories from the database using the DbContext set in Data folder
             return View(objCategoryList);
         }
 
@@ -34,8 +36,8 @@ namespace ComicBookCrud.Controllers
             }
             if (ModelState.IsValid)
             {
-                _context.Categories.Add(obj); // Adds Category object to the Category table 
-                _context.SaveChanges();
+                _unitOfWork.Category.Add(obj); // Adds Category object to the Category table 
+                _unitOfWork.Save();
                 TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index"); // Redirect to Category controller
             }
@@ -47,18 +49,18 @@ namespace ComicBookCrud.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _context.Categories.FirstOrDefault(c => c.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(c => c.Id == id);
             if (categoryFromDb == null) { return NotFound(); }
             return View(categoryFromDb);
         }
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
-            
+
             if (ModelState.IsValid)
             {
-                _context.Categories.Update(obj); // Adds Category object to the Category table 
-                _context.SaveChanges();
+                _unitOfWork.Category.Update(obj); // Adds Category object to the Category table 
+                _unitOfWork.Save();
                 TempData["success"] = "Category updated successfully";
                 return RedirectToAction("Index"); // Redirect to Category controller
             }
@@ -70,17 +72,17 @@ namespace ComicBookCrud.Controllers
             {
                 return NotFound();
             }
-            Category? categoryFromDb = _context.Categories.FirstOrDefault(c => c.Id == id);
+            Category? categoryFromDb = _unitOfWork.Category.Get(c => c.Id == id);
             if (categoryFromDb == null) { return NotFound(); }
             return View(categoryFromDb);
         }
         [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(int? id)
         {
-            Category? obj = _context.Categories.FirstOrDefault(c => c.Id == id);
+            Category? obj = _unitOfWork.Category.Get(c => c.Id == id);
             if (obj == null) { return NotFound(); }
-            _context.Categories.Remove(obj);
-            _context.SaveChanges();
+            _unitOfWork.Category.Remove(obj);
+            _unitOfWork.Save();
             TempData["success"] = "Category deleted successfully";
             return RedirectToAction("Index"); // Redirect to Category controller
         }
