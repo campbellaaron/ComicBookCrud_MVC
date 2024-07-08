@@ -1,8 +1,8 @@
-using ComicBooksWeb.Models;
+using ComicBookCrud.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace ComicBooksWeb.Controllers
+namespace ComicBookCrud.Controllers
 {
     public class HomeController : Controller
     {

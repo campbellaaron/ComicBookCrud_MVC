@@ -1,7 +1,7 @@
-﻿using ComicBooksWeb.Models;
+﻿using ComicBookCrud.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComicBooksWeb.Data
+namespace ComicBookCrud.DataAccess.Data
 {
     public class ComicCrudDbContext : DbContext
     {

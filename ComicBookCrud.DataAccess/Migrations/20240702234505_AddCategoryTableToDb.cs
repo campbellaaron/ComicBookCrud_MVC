@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ComicBooksWeb.Migrations
+namespace ComicBookCrud.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTableToDb : Migration

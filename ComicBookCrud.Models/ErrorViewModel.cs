@@ -1,4 +1,4 @@
-namespace ComicBooksWeb.Models
+namespace ComicBookCrud.Models
 {
     public class ErrorViewModel
     {

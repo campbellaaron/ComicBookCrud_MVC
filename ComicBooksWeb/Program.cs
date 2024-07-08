@@ -1,4 +1,4 @@
-using ComicBooksWeb.Data;
+using ComicBookCrud.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

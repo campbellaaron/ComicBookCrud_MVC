@@ -1,8 +1,8 @@
-﻿using ComicBooksWeb.Data;
-using ComicBooksWeb.Models;
+﻿using ComicBookCrud.DataAccess.Data;
+using ComicBookCrud.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ComicBooksWeb.Controllers
+namespace ComicBookCrud.Controllers
 {
     public class CategoryController : Controller
     {
