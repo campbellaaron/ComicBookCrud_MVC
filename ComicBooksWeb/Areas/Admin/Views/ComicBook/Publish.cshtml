@@ -1,0 +1,107 @@
+﻿@model ComicBookVM
+
+<div class="card shadow border-0 my-4">
+    <div class="card-header bg-secondary bg-gradient ms-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.ComicBook.Id!=0?"Update":"Create") ComicBook</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="ComicBook.Id" hidden />
+            <input asp-for="ComicBook.ImageUrl" hidden />
+            <div class="row">
+                <div class="col-10">
+                    <div class="border p-3">
+                        <div asp-validation-summary="ModelOnly" class="text-warning"></div> <!-- Only displays errors in the Model and not the properties themselves  -->
+                        <div class="form-floating py-2 col-12">
+                            <input type="text" asp-for="ComicBook.Title" class="form-control border-0 shadow" />
+                            <label asp-for="ComicBook.Title" class="ms-2"></label>
+                            <span asp-validation-for="ComicBook.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="ComicBook.Issue" class="form-control border-0 shadow" type="number" />
+                            <label asp-for="ComicBook.Issue" class="ms-2"></label>
+                            <span asp-validation-for="ComicBook.Description" class="text-danger"></span>
+                        </div>
+                        <div class="py-2 col-12">
+                            <label asp-for="ComicBook.Description" class="ms-2 pb-2"></label>
+                            <textarea asp-for="ComicBook.Description" class="form-control border-0 shadow" rows="25"></textarea>
+                            <span asp-validation-for="ComicBook.Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="ComicBook.Author" class="form-control border-0 shadow" type="text" />
+                            <label asp-for="ComicBook.Author" class="ms-2"></label>
+                            <span asp-validation-for="ComicBook.Author" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="ComicBook.Publisher" class="form-control border-0 shadow" type="text" />
+                            <label asp-for="ComicBook.Publisher" class="ms-2"></label>
+                            <span asp-validation-for="ComicBook.Publisher" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="ComicBook.CoverPrice" class="form-control border-0 shadow" step="0.01" min="1" type="number" />
+                            <label asp-for="ComicBook.CoverPrice" class="ms-2"></label>
+                            <span asp-validation-for="ComicBook.CoverPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="ComicBook.ListPrice" class="form-control border-0 shadow" step="0.01" min="1" type="number" />
+                            <label asp-for="ComicBook.ListPrice" class="ms-2"></label>
+                            <span asp-validation-for="ComicBook.ListPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="ComicBook.CategoryId" asp-items="@Model.CategoryList" class="form-select border-0 shadow">
+                                <option disabled selected>-- Select Category --</option>
+                            </select>
+                            <label asp-for="ComicBook.CategoryId" class="ms-2"></label>
+                            <span asp-validation-for="ComicBook.CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="py-2 col-12">
+                            <label asp-for="ComicBook.ImageUrl" class="ms-2"></label>
+                            <input type="file" name="file" class="form-control border-0 shadow"/>
+                        </div>
+                        <div class="my-3 p-2">
+                            @if (Model.ComicBook.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-success my-2 me-3">Update</button>
+                            }
+                            else 
+                            {
+                                <button type="submit" class="btn btn-success my-2 me-3">Create</button>
+                            }
+                            <a class="btn btn-danger my-2" asp-action="Index">Cancel & Return to List</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <img src="@Model.ComicBook.ImageUrl" width="100%"
+                        style="border-radius:10px;border:1px solid #bbb9b9"/>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap ',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    }
+}

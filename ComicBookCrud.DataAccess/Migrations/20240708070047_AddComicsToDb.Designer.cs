@@ -3,6 +3,7 @@ using ComicBookCrud.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComicBookCrud.DataAccess.Migrations
 {
     [DbContext(typeof(ComicCrudDbContext))]
-    partial class ComicCrudDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240708070047_AddComicsToDb")]
+    partial class AddComicsToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,17 +77,10 @@ namespace ComicBookCrud.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<double>("CoverPrice")
                         .HasColumnType("float");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -104,8 +100,6 @@ namespace ComicBookCrud.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("ComicBooks");
 
                     b.HasData(
@@ -113,10 +107,8 @@ namespace ComicBookCrud.DataAccess.Migrations
                         {
                             Id = 1,
                             Author = "Neil Gaiman & Dave McKean",
-                            CategoryId = 1,
                             CoverPrice = 3.5,
                             Description = "Two girls awaken in a greenhouse and encounter DC characters like Batman and Swamp Thing",
-                            ImageUrl = "",
                             Issue = 1,
                             ListPrice = 11.99,
                             Publisher = "DC Comics",
@@ -126,10 +118,8 @@ namespace ComicBookCrud.DataAccess.Migrations
                         {
                             Id = 2,
                             Author = "Neil Gaiman & Dave McKean",
-                            CategoryId = 1,
                             CoverPrice = 3.5,
                             Description = "Black Orchid tries to remember her sister; Carl returns to get revenge on Philip for stealing his woman",
-                            ImageUrl = "",
                             Issue = 2,
                             ListPrice = 12.99,
                             Publisher = "DC Comics",
@@ -139,26 +129,13 @@ namespace ComicBookCrud.DataAccess.Migrations
                         {
                             Id = 3,
                             Author = "James Tynion & Fernando Blanco",
-                            CategoryId = 2,
                             CoverPrice = 9.9900000000000002,
                             Description = "Issues 1-5 of the infamouse \"w0rldtr33\" series. In 1999, Gabriel and his friends discover the Undernet -- a secret architecture to the Internet.",
-                            ImageUrl = "",
                             Issue = 1,
                             ListPrice = 9.9900000000000002,
                             Publisher = "Image Comics",
                             Title = "w0rltr33"
                         });
-                });
-
-            modelBuilder.Entity("ComicBookCrud.Models.ComicBook", b =>
-                {
-                    b.HasOne("ComicBookCrud.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }

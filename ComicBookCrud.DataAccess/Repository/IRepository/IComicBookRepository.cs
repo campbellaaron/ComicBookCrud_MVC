@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ComicBookCrud.Models;
 
 namespace ComicBookCrud.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface IComicBookRepository : IRepository<ComicBook>
     {
-        ICategoryRepository Category { get; }
-        IComicBookRepository ComicBook { get; }
-
-        void Save();
+        void Update(ComicBook obj);
     }
 }

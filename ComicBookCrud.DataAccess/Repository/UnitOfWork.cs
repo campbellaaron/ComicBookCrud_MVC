@@ -13,10 +13,12 @@ namespace ComicBookCrud.DataAccess.Repository
 
         private ComicCrudDbContext _db;
         public ICategoryRepository Category {  get; private set; }
+        public IComicBookRepository ComicBook { get; private set; }
         public UnitOfWork(ComicCrudDbContext db)
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            ComicBook = new ComicBookRepository(_db);
         }
 
         public void Save()
