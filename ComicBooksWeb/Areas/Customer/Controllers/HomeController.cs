@@ -1,3 +1,4 @@
+using ComicBookCrud.DataAccess.Repository.IRepository;
 using ComicBookCrud.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -8,15 +9,24 @@ namespace ComicBooksWeb.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<ComicBook> books = _unitOfWork.ComicBook.GetAll(includeProperties: "Category");
+            return View(books);
+        }
+        
+        public IActionResult Details(int comicBookId)
+        {
+            ComicBook book = _unitOfWork.ComicBook.Get(u=>u.Id==comicBookId, includeProperties: "Category");
+            return View(book);
         }
 
         public IActionResult Privacy()

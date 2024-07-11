@@ -1,8 +1,31 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IEnumerable<ComicBook>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="row pb-3">
+        @foreach (var comicbook in Model)
+    {
+        <div class="col-lg-3 col-sm-6 d-flex align-items-stretch">
+            <div class="row p-2">
+                <div class="col-12 p-1">
+                    <div class="card h-100 border-0 mb-0 p-3 shadow border-top border-5 rounded">
+                        <img src="@comicbook.ImageUrl" class="card-img-top rounded"/>
+                        <div class="card-body pb-0 d-flex flex-column align-self-end">
+                            <div class="ps-1 mb-auto">
+                                <p class="card-title h5 opacity-75 text-uppercase text-center">@comicbook.Title</p>
+                                <p class="card-title text-warning text-center">by <b>@comicbook.Author</b></p>
+                            </div>
+                            <div class="ps-1">
+                                <p class="text-uppercase text-opacity-75 text-center mb-0"><span class="text-primary pe-1">Original Cover Price:</span> @comicbook.CoverPrice.ToString("c")</p>
+                            </div>
+                            <div class="ps-1">
+                                <p class="text-uppercase text-opacity-75 text-center"><span class="text-info pe-1">Currently Valued At:</span> @comicbook.ListPrice.ToString("c")</p>
+                            </div>
+                        </div>
+                        <div>
+                            <a asp-action="Details" asp-route-comicBookId="@comicbook.Id" class="btn btn-primary bg-gradient border-0 form-control">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
