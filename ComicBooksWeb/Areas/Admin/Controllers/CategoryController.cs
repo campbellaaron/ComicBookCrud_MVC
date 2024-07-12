@@ -1,11 +1,14 @@
 ﻿using ComicBookCrud.DataAccess.Data;
 using ComicBookCrud.DataAccess.Repository.IRepository;
 using ComicBookCrud.Models;
+using ComicBookCrud.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComicBooksWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

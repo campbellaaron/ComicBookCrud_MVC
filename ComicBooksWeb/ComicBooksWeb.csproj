@@ -27,6 +27,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ComicBookCrud.DataAccess\ComicBookCrud.DataAccess.csproj" />
     <ProjectReference Include="..\ComicBookCrud.Models\ComicBookCrud.Models.csproj" />
+    <ProjectReference Include="..\ComicBookCrud.Utility\ComicBookCrud.Utility.csproj" />
   </ItemGroup>
 
   <ItemGroup>

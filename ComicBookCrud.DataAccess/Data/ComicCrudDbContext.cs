@@ -14,6 +14,7 @@ namespace ComicBookCrud.DataAccess.Data
         // Add DB Set for each table. Hoping to include Categories, Publishers (DC, Marvel, etc), and a third one. Still working on that. 
         public DbSet<Category> Categories { get; set; }
         public DbSet<ComicBook> ComicBooks { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

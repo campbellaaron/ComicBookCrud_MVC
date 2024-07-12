@@ -2,12 +2,15 @@
 using ComicBookCrud.DataAccess.Repository.IRepository;
 using ComicBookCrud.Models;
 using ComicBookCrud.Models.ViewModels;
+using ComicBookCrud.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ComicBooksWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ComicBookController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
