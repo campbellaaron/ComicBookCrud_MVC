@@ -1,11 +1,16 @@
 ﻿@model ComicBook
 
+@{
+    ViewData["Title"] = @Model.Title;
+}
+
 <form method="post">
     <div class="card shadow border-0 my-4">
         <div class="card-header bg-secondary bg-gradient text-light py-4">
             <div class="row">
                 <div class="col-12 text-center">
                     <h3 class="text-white text-uppercase">@Model.Title</h3>
+                    <p class="text-info fw-bolder my-2">Issue Number: <span class="text-light">@Model.Issue</span></p>
                     <p class="text-white-50 fw-semibold mb-0">by @Model.Author</p>
                 </div>
             </div>

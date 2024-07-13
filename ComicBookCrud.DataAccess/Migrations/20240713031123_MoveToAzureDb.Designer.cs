@@ -4,6 +4,7 @@ using ComicBookCrud.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ComicBookCrud.DataAccess.Migrations
 {
     [DbContext(typeof(ComicCrudDbContext))]
-    partial class ComicCrudDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240713031123_MoveToAzureDb")]
+    partial class MoveToAzureDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

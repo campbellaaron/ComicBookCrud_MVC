@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<ComicBook>
 
+@{
+    ViewData["Title"] = "Comic Book CRUD Web App";
+}
+
     <div class="row pb-3">
         @foreach (var comicbook in Model)
     {
